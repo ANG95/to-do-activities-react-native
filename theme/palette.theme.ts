@@ -1,5 +1,5 @@
 export const palette = {
-  black: '#282c34',
+  black: '#000',
 
   blackText: '#000C2E',
   grey: '#828AA1',

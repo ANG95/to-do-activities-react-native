@@ -5,23 +5,30 @@ import { SvgIcon } from '../svgIcon/svgIconComponent';
 import { MainTabProps } from './iconTabProps';
 import styles from './styles';
 
-const { primary, palette } = color;
+const { primary, palette, } = color;
 
 export const IconTabs = ({
   tx,
   icon,
   focused,
 }: MainTabProps) => {
-  const colorElement = focused ? primary : palette.grey;
+  const colorElement = focused ? palette.white : palette.greyLight;
   const renderIcon = (
     <View style={styles.tabElementContainer}>
       <SvgIcon
         icon={icon}
         color={colorElement}
-        heightScale={20}
-        widthScale={20}
+        heightScale={focused ? 28 : 25}
+        widthScale={focused ? 28 : 25}
       />
-      <Text style={[styles.labelText, { color: colorElement }]}>{tx}</Text>
+      <Text
+        style={[styles.labelText, { 
+          color: colorElement,
+          fontWeight: focused? 'bold': '200'
+        }]}
+      >
+        {tx}
+      </Text>
     </View>
   );
   return renderIcon;

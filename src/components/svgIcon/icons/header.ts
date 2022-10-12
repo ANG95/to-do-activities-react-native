@@ -1,0 +1,2 @@
+export const HEADER =
+'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#5233EA" d="m0 128 80 21.3c80 21.7 240 63.7 400 48C640 181 800 107 960 80s320-5 400 5.3l80 10.7V0H0Z"/></svg>'

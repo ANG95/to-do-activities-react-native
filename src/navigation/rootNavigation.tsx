@@ -11,15 +11,15 @@ const { Navigator, Screen } = createBottomTabNavigator();
 export function RootNavigator() {
   return (
     <Navigator
-      initialRouteName={Routes.CompletedTaskScreen}
+      initialRouteName={Routes.PendingTaskScreen}
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: styles.containerNav,
         headerShown: false,
       }}>
       <Screen
-        name={Routes.CompletedTaskScreen}
-        component={CompletedTaskScreen}
+        name={Routes.PendingTaskScreen}
+        component={PendingTaskScreen}
         options={{
           tabBarIcon: function RenderIcon(props) {
             return (
@@ -33,8 +33,8 @@ export function RootNavigator() {
         }}
       />
       <Screen
-        name={Routes.PendingTaskScreen}
-        component={PendingTaskScreen}
+        name={Routes.CompletedTaskScreen}
+        component={CompletedTaskScreen}
         options={{
           tabBarIcon: function RenderIcon(props) {
             return (
@@ -47,22 +47,6 @@ export function RootNavigator() {
           },
         }}
       />
-
-      {/* <Screen
-        name={Routes.PendingTaskScreen}
-        component={PendingTaskScreen}
-        options={{
-          tabBarIcon: function RenderIcon(props) {
-            return (
-              <IconTabs
-                tx="tabsNavigation.HomeMenu"
-                icon="menuIcon"
-                focused={props.focused}
-              />
-            );
-          },
-        }}
-      /> */}
     </Navigator>
   );
 }
