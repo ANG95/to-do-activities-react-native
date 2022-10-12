@@ -1,38 +1,68 @@
+// import React from 'react';
 import React from 'react';
-import { PendingTaskScreen } from '../screens/pendingTask/pendingTaskScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CompletedTask from './../../assets/svg/completedTask.svg';
-import PendingTask from './../../assets/svg/pendingTask.svg';
-import CompletedTaskScreen from '../screens/completedTask/completedTaskScreen';
+import styles from '../components/mainTab/styles';
+import { CompletedTaskScreen, PendingTaskScreen } from '../screens';
+import { Routes } from './routeNames';
+import { IconTabs } from '../components/mainTab/iconTabComponent';
 
-const Tab = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 
-export const RootNavigator = () => {
+export function RootNavigator() {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          if (route.name === 'PendingTaskScreen') {
-            return <PendingTask height={size} width={size} fill={color} />;
-          } else if (route.name === 'CompletedTaskScreen') {
-            return <CompletedTask height={size} width={size} fill={color} />;
-          }
-        },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
+    <Navigator
+      initialRouteName={Routes.CompletedTaskScreen}
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarStyle: styles.containerNav,
         headerShown: false,
-      })}
-    >
-      <Tab.Screen
-        options={{ title: 'PENDIENTES' }}
-        name="PendingTaskScreen"
-        component={PendingTaskScreen}
-      />
-      <Tab.Screen
-        options={{ title: 'COMPLETADAS' }}
-        name="CompletedTaskScreen"
+      }}>
+      <Screen
+        name={Routes.CompletedTaskScreen}
         component={CompletedTaskScreen}
+        options={{
+          tabBarIcon: function RenderIcon(props) {
+            return (
+              <IconTabs
+                tx="PENDIENTES"
+                icon="pendingTask"
+                focused={props.focused}
+              />
+            );
+          },
+        }}
       />
-    </Tab.Navigator>
+      <Screen
+        name={Routes.PendingTaskScreen}
+        component={PendingTaskScreen}
+        options={{
+          tabBarIcon: function RenderIcon(props) {
+            return (
+              <IconTabs
+                tx="COMPLETADAS"
+                icon="completedTask"
+                focused={props.focused}
+              />
+            );
+          },
+        }}
+      />
+
+      {/* <Screen
+        name={Routes.PendingTaskScreen}
+        component={PendingTaskScreen}
+        options={{
+          tabBarIcon: function RenderIcon(props) {
+            return (
+              <IconTabs
+                tx="tabsNavigation.HomeMenu"
+                icon="menuIcon"
+                focused={props.focused}
+              />
+            );
+          },
+        }}
+      /> */}
+    </Navigator>
   );
 }
