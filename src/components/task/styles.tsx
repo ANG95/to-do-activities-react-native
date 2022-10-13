@@ -17,7 +17,15 @@ export const styles = StyleSheet.create({
     flex: 1,
     color: palette.blackText,
     fontSize: moderateScale(15),
-    marginLeft: verticalScale(5)
+    marginLeft: verticalScale(8)
+  },
+  taskDescriptionInput: {
+    flexWrap: 'wrap',
+    flex: 1,
+    color: palette.blackText,
+    fontSize: moderateScale(15),
+    marginLeft: verticalScale(8),
+    padding: 0
   },
   dateText: {
     textAlign: 'right',

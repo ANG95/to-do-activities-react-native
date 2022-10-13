@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { ActivitiesContext } from "../../../context/activitiesContext";
 import { Routes } from "../../../navigation/routeNames";
 import { Fetch } from "../../../services/api/apiHandler";
-import { CURRENT_DATE } from "../../../utils/functions";
+import { CURRENT_DATE, UuID } from "../../../utils/functions";
 
 interface Facts {
   fact: String;
@@ -23,7 +23,7 @@ export const UseSubmitForm = (url: string): [Function, boolean, []] => {
         return {
           ...element,
           created: CURRENT_DATE,
-          key: (numerator + i).toString(),
+          key: UuID()+(numerator + i).toString(),
           status: 'pending',
         }
       });

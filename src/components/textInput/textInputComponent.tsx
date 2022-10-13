@@ -3,8 +3,8 @@ import React from 'react'
 import { styles } from './styles'
 
 interface TextInputProps {
-  onChangeText: (e:string) => void;
-  keyboardType: KeyboardTypeOptions;
+  onChangeText?: (e:string) => void;
+  keyboardType?: KeyboardTypeOptions;
   placeholder?: string;
   value: string;
   style?: any;

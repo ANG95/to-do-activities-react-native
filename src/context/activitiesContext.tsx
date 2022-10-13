@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { Task, User } from '../interfaces/appInterfaces';
-import { CURRENT_DATE } from '../utils/functions';
+import { CURRENT_DATE, UuID } from '../utils/functions';
 import { ActivitiesReducer, ActivitiesState } from './activitiesReducer';
 
 type ActivitiesContextProps = {
@@ -9,6 +9,7 @@ type ActivitiesContextProps = {
   errorMessage: string;
   saveActivities: (data: any) => Promise<void>;
   updateActivity: (id: string) => Promise<void>;
+  updateTaskActivity: (id: string, description: string) => Promise<void>;
   deleteActivity: (id: string) => Promise<void>;
   logOut: () => void;
 }
@@ -16,14 +17,14 @@ type ActivitiesContextProps = {
 const activitiesInitialState: ActivitiesState = {
   tasks: [
     {
-      key: '1',
+      key: UuID(),
       fact: "😸 cats do not have a sweet tooth. 🐯 Scientists believe this is due to a mutation in a key taste receptor.🐱",
       length: 1,
       created: CURRENT_DATE,
       status: 'pending',
     },
     {
-      key: '2',
+      key: UuID(),
       fact: "🐱When a cat chases its prey, it keeps its head level. Dogs🐾 🐆 and humans bob their heads 🐯up and down.",
       length: 2,
       created: CURRENT_DATE,
@@ -60,6 +61,16 @@ export const ActivitiesProvider = ({ children }: any) => {
     });
   };
 
+  const updateTaskActivity = async (id: string, description: string) => {
+    const indexTask = state.tasks.findIndex((item) => item.key === id);
+    state.tasks[indexTask].fact = description;
+
+    dispatch({
+      type: 'updateTask',
+      payload: state.tasks
+    });
+  };
+
   const deleteActivity = async (id: string) => {
     const updateData = state.tasks.filter((item) => item.key !== id);
     dispatch({
@@ -76,6 +87,7 @@ export const ActivitiesProvider = ({ children }: any) => {
       ...state,
       saveActivities,
       updateActivity,
+      updateTaskActivity,
       deleteActivity,
       logOut,
     }}>

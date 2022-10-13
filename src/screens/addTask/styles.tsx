@@ -28,9 +28,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textInput: {
-    width: '26%',
+    width: '35%',
     marginRight: 10,
-    height: 40,
     marginBottom:0
   }
 });

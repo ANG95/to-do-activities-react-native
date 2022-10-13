@@ -1,44 +1,25 @@
-import { FlatList, ListRenderItem, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { useContext } from 'react'
-import { FloatButton, Header, Container, Task } from '../../components';
+import { FloatButton, Header, Container } from '../../components';
 import { styles } from './styles';
 import { ActivitiesContext } from '../../context/activitiesContext';
 import { Routes } from '../../navigation/routeNames';
 import { NavigationPropsType } from '../../interfaces/appInterfaces';
+import { RenderTasks } from './components/renderTasks';
 
-interface RenderItem {
-    key: string;
-    created: string;
-    fact: string;
-    length: number | string,
-    status: 'pending' | 'completed',
-}
+const PENDING_STATUS ='pending'
 
-export const PendingTaskScreen = ({ navigation }: NavigationPropsType) => {
+export const PendingTaskScreen = ({ navigation:{navigate} }: NavigationPropsType) => {
   const { tasks } = useContext(ActivitiesContext);
-  const renderItem: ListRenderItem<RenderItem> = ({ item }) => (
-    <Task
-      id={item.key}
-      description={item.fact}
-      date={item.created} 
-      onPress={()=>console.log('object')}
-      disabled={item.status === 'completed'}
-    />
-  );
+  const updateData = tasks.filter((item) => item.status === PENDING_STATUS);
   return (
     <Container>
       <Header />
       <View style={styles.pendingContainer}>
-        <Text>HomeScreen</Text>
-        <FlatList
-          data={tasks}
-          renderItem={renderItem}
-          keyExtractor={item => item.key}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-        />
+        <Text style={styles.title}>ACTIVIDADES PENDIENTES {updateData.length}</Text>
+        <RenderTasks data={updateData}/>
       </View>
-      <FloatButton onPress={() => navigation.navigate(Routes.AddTaskScreen)} />
+      <FloatButton onPress={() => navigate(Routes.AddTaskScreen)} />
     </Container>
   )
 }

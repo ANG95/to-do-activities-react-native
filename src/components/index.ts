@@ -7,3 +7,4 @@ export * from './container/containerComponent';
 export * from './task/taskComponent';
 export * from './button/buttonComponent';
 export * from './textInput/textInputComponent';
+export * from './searchBar/searchBarComponent';
