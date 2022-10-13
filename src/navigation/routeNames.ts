@@ -1,4 +1,6 @@
 export enum Routes {
   PendingTaskScreen = 'PendingTaskScreen',
-  CompletedTaskScreen = 'CompletedTaskScreen'
+  CompletedTaskScreen = 'CompletedTaskScreen',
+  AddTaskScreen = 'AddTaskScreen',
+  StackNavigation= 'StackNavigation'
 }

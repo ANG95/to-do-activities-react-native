@@ -2,7 +2,7 @@ import { API_URL } from "../../utils/constants"
 
 const DEFAULT_METHOD = 'GET'
 
-async function Fetch(endpointName, method = DEFAULT_METHOD, body = null) {
+async function Fetch(endpointName: string, method = DEFAULT_METHOD, body = null) {
 
   const config = {
     method,

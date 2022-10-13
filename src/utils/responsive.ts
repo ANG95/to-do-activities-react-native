@@ -19,4 +19,4 @@ const moderateScale = (size: number, factor: number = 0.5): number => {
 
 const NAVIGATION_BAR_HEIGHT = verticalScale(78);
 
-export { scale, verticalScale, moderateScale, NAVIGATION_BAR_HEIGHT };
+export { scale, verticalScale, moderateScale, NAVIGATION_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT };

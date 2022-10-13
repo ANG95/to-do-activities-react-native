@@ -8,12 +8,12 @@ import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler"
 import { LeftRender } from './leftRender'
 import { RightRender } from './rightRender'
 
-
 interface TaskProps {
   description: string;
+  date: string;
 }
 
-export const Task = ({ description }: TaskProps) => {
+export const Task = ({ description, date }: TaskProps) => {
   return (
     <GestureHandlerRootView>
       <Swipeable
@@ -37,7 +37,7 @@ export const Task = ({ description }: TaskProps) => {
               </View>
               <Text style={styles.taskDescription}>{description}</Text>
             </View>
-            <Text style={styles.dateText}>12/10/2022 12:20</Text>
+            <Text style={styles.dateText}>{date}</Text>
           </Card>
         </View>
       </Swipeable>

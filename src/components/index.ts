@@ -5,3 +5,5 @@ export * from './mainTab/iconTabComponent';
 export * from './floatButton/floatButtonComponent';
 export * from './container/containerComponent';
 export * from './task/taskComponent';
+export * from './button/buttonComponent';
+export * from './textInput/textInputComponent';

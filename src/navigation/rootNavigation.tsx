@@ -1,10 +1,10 @@
-// import React from 'react';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import styles from '../components/mainTab/styles';
 import { CompletedTaskScreen, PendingTaskScreen } from '../screens';
 import { Routes } from './routeNames';
 import { IconTabs } from '../components/mainTab/iconTabComponent';
+import { StackNavigation } from './stackNavigation';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -16,17 +16,18 @@ export function RootNavigator() {
         tabBarShowLabel: false,
         tabBarStyle: styles.containerNav,
         headerShown: false,
+        tabBarHideOnKeyboard: true,
       }}>
       <Screen
-        name={Routes.PendingTaskScreen}
-        component={PendingTaskScreen}
+        name={Routes.StackNavigation}
+        component={StackNavigation}
         options={{
-          tabBarIcon: function RenderIcon(props) {
+          tabBarIcon: function RenderIcon({ focused }) {
             return (
               <IconTabs
                 tx="PENDIENTES"
                 icon="pendingTask"
-                focused={props.focused}
+                focused={focused}
               />
             );
           },
@@ -36,12 +37,12 @@ export function RootNavigator() {
         name={Routes.CompletedTaskScreen}
         component={CompletedTaskScreen}
         options={{
-          tabBarIcon: function RenderIcon(props) {
+          tabBarIcon: function RenderIcon({ focused }) {
             return (
               <IconTabs
                 tx="COMPLETADAS"
                 icon="completedTask"
-                focused={props.focused}
+                focused={focused}
               />
             );
           },

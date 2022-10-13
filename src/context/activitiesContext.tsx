@@ -1,82 +1,66 @@
 import React, { createContext, useReducer } from 'react';
 import { User } from '../interfaces/appInterfaces';
+import { CURRENT_DATE } from '../utils/functions';
 import { ActivitiesReducer, ActivitiesState } from './activitiesReducer';
 
 type ActivitiesContextProps = {
-    tasks: any,
-    user: User,
-    errorMessage: string;
-    logOut: () => void;
+  tasks: any[],
+  user: User,
+  errorMessage: string;
+  saveActivities: (data: any) => Promise<void>;
+  logOut: () => void;
 }
 
 const activitiesInitialState: ActivitiesState = {
-    tasks: [
-      {
-        "fact": "Unlike dogs, cats do not have a sweet tooth. Scientists believe this is due to a mutation in a key taste receptor.",
-        "length": 114
-      },
-      {
-        "fact": "When a cat chases its prey, it keeps its head level. Dogs and humans bob their heads up and down.",
-        "length": 97
-      },
-      {
-        "fact": "The technical term for a cat’s hairball is a “bezoar.”",
-        "length": 54
-      },
-      {
-        "fact": "A group of cats is called a “clowder.”",
-        "length": 38
-      },
-      {
-        "fact": "A cat can’t climb head first down a tree because every claw on a cat’s paw points the same way. To get down from a tree, a cat must back down.",
-        "length": 142
-      },
-      {
-        "fact": "Cats make about 100 different sounds. Dogs make only about 10.",
-        "length": 62
-      },
-      {
-        "fact": "Every year, nearly four million cats are eaten in Asia.",
-        "length": 55
-      },
-      {
-        "fact": "There are more than 500 million domestic cats in the world, with approximately 40 recognized breeds.",
-        "length": 100
-      },
-      {
-        "fact": "Approximately 24 cat skins can make a coat.",
-        "length": 43
-      },
-      {
-        "fact": "While it is commonly thought that the ancient Egyptians were the first to domesticate cats, the oldest known pet cat was recently found in a 9,500-year-old grave on the Mediterranean island of Cyprus. This grave predates early Egyptian art depicting cats by 4,000 years or more.",
-        "length": 278
-      }
-    ],
-    user: {
-        name: 'German',
-        photo: 'algo.jpg'
+  tasks: [
+    {
+      key: 1,
+      fact: "-Unlike dogs, cats do not have a sweet tooth. Scientists believe this is due to a mutation in a key taste receptor.",
+      length: 1,
+      created: CURRENT_DATE,
+      status: 'pending',
     },
-    errorMessage: ''
+    {
+      key: 2,
+      fact: "-When a cat chases its prey, it keeps its head level. Dogs and humans bob their heads up and down.",
+      length: 2,
+      created: CURRENT_DATE,
+      status: 'completed',
+    },
+  ],
+  user: {
+    name: 'German',
+    photo: 'algo.jpg'
+  },
+  errorMessage: ''
 }
 
 export const ActivitiesContext = createContext({} as ActivitiesContextProps);
 
 export const ActivitiesProvider = ({ children }: any) => {
 
-    const [state, dispatch] = useReducer(ActivitiesReducer, activitiesInitialState);
+  const [state, dispatch] = useReducer(ActivitiesReducer, activitiesInitialState);
 
-    const logOut = async () => {
-        dispatch({ type: 'logout' });
-    };
+  const saveActivities = async (data) => {
+    console.log('data ', data);
+    dispatch({
+      type: 'addTasks',
+      payload: data
+    });
+  };
 
-    return (
-        <ActivitiesContext.Provider value={{
-            ...state,
-            logOut,
-        }}>
-            {children}
-        </ActivitiesContext.Provider>
-    )
+  const logOut = async () => {
+    dispatch({ type: 'logout' });
+  };
+  return (
+    <ActivitiesContext.Provider value={{
+      ...state,
+      saveActivities,
+      logOut,
+    }}>
+      {children}
+    </ActivitiesContext.Provider>
+  )
 }
 
 
