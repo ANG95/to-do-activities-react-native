@@ -22,6 +22,9 @@ export const styles = StyleSheet.create({
   dateText: {
     textAlign: 'right',
     fontStyle: 'italic',
+    marginTop: verticalScale(5),
+    fontSize: moderateScale(12),
+    color: palette.leadLight
   },
   leftSwipe: {
     width: '40%',

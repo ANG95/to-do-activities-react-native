@@ -17,7 +17,13 @@ interface RenderItem {
 export const PendingTaskScreen = ({ navigation }: NavigationPropsType) => {
   const { tasks } = useContext(ActivitiesContext);
   const renderItem: ListRenderItem<RenderItem> = ({ item }) => (
-    <Task description={item.fact} date={item.created} />
+    <Task
+      id={item.key}
+      description={item.fact}
+      date={item.created} 
+      onPress={()=>console.log('object')}
+      disabled={item.status === 'completed'}
+    />
   );
   return (
     <Container>
